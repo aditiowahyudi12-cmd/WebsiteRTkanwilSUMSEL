@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Shcedular Kanwil Imigrasi Sumsel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="navbar">
+    <div class="brand">
+        <div class="logo"><img src="imigrasi.jpg"></div>
+        <div class="title">
+            <h1>RT Kantor Wilayah Sumatera Selatan</h1>
+            <span>Scheduler</span>
+        </div>
+    </div>
+<div class="btn-container">
+  <div class="dropdown">
+    <button class="btn btn-Data">
+      Data ▾
+    </button>
+    <div class="dropdown-menu">
+      <a href="data-excel.html">📊 Data AC</a>
+      <a href="data-kendaraan.html">🚗 Data Kendaraan Dinas</a>
+      <a href="data-barang.html">📦 Data Ketersediaan Barang</a>
+    </div>
+  </div>
+  <button id="btnAdd" class="btn btn-primary">+ Tambah</button>
+</div>
+
+</header>
+
+<!-- MAIN -->
+<main class="container">
+    <!-- EMPTY STATE -->
+    <section id="emptyState" class="empty-state">
+        <h2>Belum Ada Komponen</h2>
+        <p>Mulai tambahkan komponen atau peralatan yang perlu dijadwalkan</p>
+        <button class="btn btn-primary" onclick="openModal()">+ Tambah Komponen Pertama</button>
+    </section>
+
+
+    <section class="list-area">
+
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="hidden">
+        <div class="summary">
+            <h3>Total Komponen: <span id="totalKomponen">0</span></h3>
+            <div class="status">
+                <span class="dot red"></span> <small id="terlambat">0 Terlambat</small>
+                <span class="dot yellow"></span> <small id="segera">0 Segera</small>
+                <span class="dot green"></span> <small id="aman">0 Aman</small>
+            </div>
+        </div>
+
+        <div id="cardContainer" class="card-container"></div>
+    </section>
+
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+
+        <input type="hidden" id="editIndex">
+
+        <h2>Tambah Komponen Baru</h2>
+        <p>Isi informasi komponen yang perlu dijadwalkan</p>
+
+        <label>Nama Barang / Komponen</label>
+        <input type="text" id="nama" placeholder="Contoh: AC Ruang Rapat">
+
+        <label> Tanggal Terakhir</label>
+        <input type="date" id="tanggal">
+
+        <label>Interval Waktu (Bulan)</label>
+        <input type="number" id="interval" value="2" min="1">
+
+        <div class="modal-actions">
+           <button class="btn btn-outline" onclick="closeModal(true)">Batal</button>
+           <button class="btn btn-primary" onclick="simpanData()">Simpan</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
